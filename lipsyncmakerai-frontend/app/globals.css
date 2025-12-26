@@ -2,32 +2,51 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ███ DESIGN THEME ███ */
 :root {
-  --background: #0a0a0a; /* Dark background */
-  --foreground: #f0f0f0; /* Light text color */
-  --primary: #00FF00; /* Neon Green */
-  --secondary: #00BFFF; /* Neon Blue */
-  --card: #121212; /* Card background */
+  --background: #060606;
+  --foreground: #e8e8e8;
+  --primary: #00ff88;
+  --secondary: #00c8ff;
+  --card: #0d0d0d;
+  --border: #1f1f1f;
 }
 
 body {
   background-color: var(--background);
   color: var(--foreground);
+  font-family: Arial, sans-serif;
 }
 
-button {
-  background-color: var(--primary);
-  color: var(--foreground);
+/* Buttons */
+.btn-primary {
+  background: var(--primary);
+  color: black;
+  font-weight: bold;
+  padding: 14px 20px;
+  border-radius: 8px;
+  transition: 0.25s;
+}
+.btn-primary:hover {
+  background: var(--secondary);
+  transform: scale(1.05);
 }
 
-button:hover {
-  background-color: var(--secondary);
-}
-
+/* Cards */
 .card {
-  background-color: var(--card);
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 20px;
 }
 
-.text-accent {
-  color: var(--secondary);
+/* Slider */
+.slider {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.slider::-webkit-scrollbar {
+  display: none;
 }

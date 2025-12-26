@@ -1,51 +1,79 @@
-import { Button } from "@/components/ui/button";  // Import button component
-import { Card } from "@/components/ui/card";     // Import card component
+"use client";
+
+import { useState } from "react";
 
 export default function HomePage() {
+  const API = process.env.NEXT_PUBLIC_API_URL;
+  const [image, setImage] = useState<File | null>(null);
+  const [audio, setAudio] = useState<File | null>(null);
+  const [text, setText] = useState("");
+  const [videoURL, setVideoURL] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const generateVideo = async () => {
+    if (!image || !audio) {
+      alert("Please upload both image & audio.");
+      return;
+    }
+
+    const form = new FormData();
+    form.append("image", image);
+    form.append("audio", audio);
+    form.append("text", text);
+
+    setLoading(true);
+    const res = await fetch(`${API}/video`, { method: "POST", body: form });
+    const data = await res.json();
+    setLoading(false);
+
+    if (data?.url) setVideoURL(`${API}${data.url}`);
+    else alert("Error: " + JSON.stringify(data));
+  };
+
   return (
-    <div className="min-h-screen bg-background text-foreground">
-      {/* Hero Section */}
-      <section className="py-20 bg-background text-center">
-        <h1 className="text-5xl font-bold text-primary">
-          Turn any voice into studio-grade lip-sync video.
-        </h1>
-        <p className="text-lg text-foreground mt-4">
-          Upload a face Image, drop in any voice, and we’ll handle the lip motion, timing, and realism for you.
-        </p>
-
-        <div className="mt-8">
-          <Button className="bg-primary hover:bg-secondary text-foreground px-6 py-2">
-            Get Started
-          </Button>
-        </div>
+    <main className="p-10 max-w-5xl mx-auto">
+      {/* HERO */}
+      <section className="text-center py-10">
+        <h1 className="text-5xl font-bold text-primary">LipsyncMaker AI</h1>
+        <p className="mt-4 text-lg">Upload a face + voice → AI generates lip-sync video like RunwayML.</p>
       </section>
 
-      {/* Features Section */}
-      <section className="py-20 bg-accent">
-        <div className="max-w-7xl mx-auto text-center">
-          <h2 className="text-3xl font-semibold text-foreground">Key Features</h2>
-          <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-            <Card className="bg-card text-foreground">
-              <div className="p-4">
-                <h3 className="font-semibold text-xl">4K-Ready Exports</h3>
-                <p>High-quality, up to 4K exports with no watermarks on paid plans.</p>
-              </div>
-            </Card>
-            <Card className="bg-card text-foreground">
-              <div className="p-4">
-                <h3 className="font-semibold text-xl">Multi-language Support</h3>
-                <p>Supports English and Urdu voices for more diverse content creation.</p>
-              </div>
-            </Card>
-            <Card className="bg-card text-foreground">
-              <div className="p-4">
-                <h3 className="font-semibold text-xl">API-First Integration</h3>
-                <p>Seamlessly integrate into your newsroom or app with our powerful API.</p>
-              </div>
-            </Card>
-          </div>
+      {/* UPLOAD PANEL */}
+      <div className="card mt-10">
+        <h2 className="text-2xl font-bold mb-4">Upload Files</h2>
+
+        <input type="file" accept="image/*" className="mb-4" onChange={(e)=>setImage(e.target.files?.[0]||null)} />
+        <input type="file" accept="audio/*" className="mb-4" onChange={(e)=>setAudio(e.target.files?.[0]||null)} />
+
+        <input
+          type="text"
+          className="w-full p-2 bg-black border border-gray-700 mt-2"
+          placeholder="Optional text prompt…"
+          onChange={(e)=>setText(e.target.value)}
+        />
+
+        <button className="btn-primary w-full mt-4" onClick={generateVideo}>
+          {loading ? "Generating…" : "Generate Video"}
+        </button>
+      </div>
+
+      {/* RESULT */}
+      {videoURL && (
+        <div className="card mt-10 text-center">
+          <h2 className="text-xl font-bold mb-4">Your Output</h2>
+          <video src={videoURL} controls className="w-full rounded-lg"></video>
+        </div>
+      )}
+
+      {/* SLIDER FEATURE PREVIEW */}
+      <section className="mt-20">
+        <h2 className="text-3xl font-bold mb-4 text-primary">Example Outputs</h2>
+        <div className="slider">
+          <img src="/samples/1.jpg" className="w-64 rounded-lg" />
+          <img src="/samples/2.jpg" className="w-64 rounded-lg" />
+          <img src="/samples/3.jpg" className="w-64 rounded-lg" />
         </div>
       </section>
-    </div>
+    </main>
   );
 }
