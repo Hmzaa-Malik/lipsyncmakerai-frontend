@@ -1,32 +1,47 @@
-// app/layout.tsx
-import type { Metadata } from "next";
-import "./globals.css";
-import { cn } from "@/lib/utils"; // shadcn helper
+import type React from "react"
+import type { Metadata } from "next"
+import { Geist, Geist_Mono } from "next/font/google"
+import { Analytics } from "@vercel/analytics/next"
+import "./globals.css"
+
+const _geist = Geist({ subsets: ["latin"] })
+const _geistMono = Geist_Mono({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "LipSyncMaker AI – AI Lip-Sync Video Studio",
+  title: "LipSync Maker AI - Building AI to Simulate Reality",
   description:
-    "Create studio-grade AI lip-sync videos from any voice in minutes. LipSyncMaker AI is your all-in-one AI video studio.",
-};
+    "Transform any voice into studio-grade lip-sync video. AI-powered lip synchronization for content creators, newsrooms, and studios.",
+  generator: "v0.app",
+  icons: {
+    icon: [
+      {
+        url: "/icon-light-32x32.png",
+        media: "(prefers-color-scheme: light)",
+      },
+      {
+        url: "/icon-dark-32x32.png",
+        media: "(prefers-color-scheme: dark)",
+      },
+      {
+        url: "/icon.svg",
+        type: "image/svg+xml",
+      },
+    ],
+    apple: "/apple-icon.png",
+  },
+}
 
 export default function RootLayout({
   children,
-}: {
-  children: React.ReactNode;
-}) {
+}: Readonly<{
+  children: React.ReactNode
+}>) {
   return (
     <html lang="en">
-      <body
-        className={cn(
-          "min-h-screen bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 text-slate-50 antialiased"
-        )}
-      >
-        {/* Subtle grid background */}
-        <div className="pointer-events-none fixed inset-0 bg-[radial-gradient(circle_at_top,_rgba(129,140,248,0.18),_transparent_55%),radial-gradient(circle_at_bottom,_rgba(14,165,233,0.18),_transparent_55%)]" />
-        <div className="relative z-10">
-          {children}
-        </div>
+      <body className={`font-sans antialiased`}>
+        {children}
+        <Analytics />
       </body>
     </html>
-  );
+  )
 }

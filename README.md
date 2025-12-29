@@ -1,36 +1,84 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# LipSync Maker AI - Runway-Inspired Frontend
+
+A sophisticated, modern landing page for LipSync Maker AI, inspired by Runway's clean and elegant design aesthetic.
+
+## Features
+
+- Dark theme with sophisticated gradients
+- Responsive design for all screen sizes
+- Modern component-based architecture
+- Smooth animations and transitions
+- Clean typography with Geist font family
+- Production-ready Next.js 16 application
+
+## Tech Stack
+
+- Next.js 16
+- React 19.2
+- TypeScript
+- Tailwind CSS v4
+- shadcn/ui components
 
 ## Getting Started
 
-First, run the development server:
+### Installation
+
+```bash
+npm install
+```
+
+### Development
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) to see the application.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Build
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run build
+```
 
-## Learn More
+### Deploy
 
-To learn more about Next.js, take a look at the following resources:
+This project is optimized for deployment on Vercel. Simply connect your GitHub repository to Vercel for automatic deployments.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Project Structure
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```
+├── app/
+│   ├── layout.tsx          # Root layout with fonts and metadata
+│   ├── page.tsx            # Main landing page
+│   └── globals.css         # Global styles and Tailwind configuration
+├── components/
+│   ├── header.tsx          # Fixed navigation header
+│   ├── hero-section.tsx    # Hero section with gradient background
+│   ├── partnership-section.tsx  # Partner logos
+│   ├── mission-section.tsx      # Mission statement
+│   ├── features-grid.tsx        # Feature cards grid
+│   ├── research-section.tsx     # Research overview
+│   ├── cta-section.tsx          # Call-to-action section
+│   ├── footer.tsx               # Footer with links
+│   └── ui/                      # shadcn/ui components
+└── public/                      # Static assets
+```
 
-## Deploy on Vercel
+## Customization
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Colors
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+The design uses a sophisticated dark theme with subtle gradients. You can customize colors in `app/globals.css` by modifying the CSS custom properties.
+
+### Content
+
+Update the content in each component file to match your specific needs. All text, images, and links can be easily modified.
+
+### Fonts
+
+The project uses Geist and Geist Mono fonts. You can change fonts in `app/layout.tsx`.
+
+## License
+
+MIT License
