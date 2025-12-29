@@ -3,17 +3,28 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/swiper-bundle.min.css"; // Import Swiper CSS
 
 const VideoSlider = () => {
-  // State to store the uploaded videos
+  // State to store the uploaded videos and video previews
   const [videos, setVideos] = useState([]);
+  const [videoPreviews, setVideoPreviews] = useState([]);
 
   // Handle video upload
   const handleVideoUpload = (event) => {
     const files = event.target.files;
     const newVideos = [];
+    const newPreviews = [];
+
     for (let i = 0; i < files.length; i++) {
-      newVideos.push(URL.createObjectURL(files[i]));
+      const file = files[i];
+      if (file.type.includes("video")) {
+        // Create object URL for the video and add to the state
+        newVideos.push(URL.createObjectURL(file));
+        // Add video thumbnail preview (optional, for user feedback)
+        newPreviews.push(URL.createObjectURL(file));
+      }
     }
-    setVideos([...videos, ...newVideos]); // Add new videos to state
+    
+    setVideos((prev) => [...prev, ...newVideos]); // Add new videos to state
+    setVideoPreviews((prev) => [...prev, ...newPreviews]); // Add video previews to state
   };
 
   return (
@@ -30,6 +41,7 @@ const VideoSlider = () => {
           className="my-4 px-4 py-2 bg-violet-500 text-white rounded-md cursor-pointer"
         />
 
+        {/* Display uploaded video previews */}
         <div className="my-10">
           <Swiper
             spaceBetween={30}
