@@ -1,80 +1,143 @@
+"use client"
+
 import { Button } from "@/components/ui/button"
 import { ArrowRight } from "lucide-react"
+import { useState, useEffect } from "react"
+
+const heroSlides = [
+  {
+    video: "/paper-boat-with-yellow-flower-floating-on-water-ci.jpg",
+    title: "Building AI to",
+    subtitle: "Simulate the World",
+    tags: [
+      "MEDIA AND ENTERTAINMENT",
+      "ROBOTICS AND AUTONOMY",
+      "GENERAL WORLD MODELS",
+      "CONVERSATIONAL REAL-TIME VIDEO AGENTS",
+    ],
+  },
+  {
+    video: "/ai-generated-realistic-person-speaking-with-perfec.jpg",
+    title: "Perfect Lip-Sync",
+    subtitle: "For Every Voice",
+    tags: ["STUDIO-GRADE LIP SYNCHRONIZATION", "MULTILINGUAL SUPPORT", "REAL-TIME PROCESSING", "API-FIRST INTEGRATION"],
+  },
+  {
+    video: "/futuristic-ai-technology-neural-network-visualizat.jpg",
+    title: "Advanced AI Models",
+    subtitle: "That Understand Speech",
+    tags: [
+      "NATURAL LANGUAGE PROCESSING",
+      "FACIAL MOTION CAPTURE",
+      "DEEP LEARNING MODELS",
+      "CLOUD-BASED INFRASTRUCTURE",
+    ],
+  },
+]
 
 export function HeroSection() {
-  return (
-    <section className="relative min-h-screen overflow-hidden gradient-hero">
-      <div className="absolute inset-0 bg-[url('/grid.svg')] bg-center opacity-20" />
+  const [currentSlide, setCurrentSlide] = useState(0)
+  const [isVideoLoaded, setIsVideoLoaded] = useState(false)
 
-      <div className="container relative mx-auto px-4 pt-32 pb-20">
-        <div className="grid gap-12 lg:grid-cols-2 lg:gap-20 items-center">
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % heroSlides.length)
+    }, 8000)
+    return () => clearInterval(timer)
+  }, [])
+
+  const slide = heroSlides[currentSlide]
+
+  return (
+    <section className="relative min-h-screen overflow-hidden">
+      <div className="absolute inset-0">
+        {heroSlides.map((slideItem, index) => (
+          <div
+            key={index}
+            className={`absolute inset-0 transition-opacity duration-1000 ${
+              index === currentSlide ? "opacity-100" : "opacity-0"
+            }`}
+          >
+            <img
+              src={slideItem.video || "/placeholder.svg"}
+              alt="Background"
+              className="h-full w-full object-cover"
+              onLoad={() => setIsVideoLoaded(true)}
+            />
+            {/* Dark overlay for better text readability */}
+            <div className="absolute inset-0 bg-black/40" />
+          </div>
+        ))}
+      </div>
+
+      {/* Content Overlay */}
+      <div className="relative z-10 container mx-auto px-4 min-h-screen flex items-center">
+        <div className="grid gap-12 lg:grid-cols-2 lg:gap-20 items-center w-full py-20">
           {/* Left Content */}
           <div className="space-y-8">
-            <div className="inline-block rounded-full border border-border/50 bg-card/50 px-4 py-1.5 text-xs font-medium backdrop-blur-sm">
-              LipSync Research
-            </div>
-
-            <h1 className="text-5xl font-bold leading-tight tracking-tighter text-balance md:text-6xl lg:text-7xl">
-              Building AI to
+            <h1 className="text-5xl font-bold leading-tight tracking-tight text-white md:text-6xl lg:text-7xl">
+              {slide.title}
               <br />
-              <span className="bg-gradient-to-r from-white to-white/60 bg-clip-text text-transparent">
-                Simulate Reality
-              </span>
+              <span className="text-balance">{slide.subtitle}</span>
             </h1>
 
-            <p className="text-lg text-muted-foreground max-w-xl text-pretty leading-relaxed">
-              We are building foundational models that understand, perceive, and generate realistic lip-sync animations.
-              The next frontier of content creation.
-            </p>
-
             <div className="flex flex-col gap-3 sm:flex-row">
-              <Button size="lg" asChild className="bg-primary text-primary-foreground hover:bg-primary/90">
-                <a href="#get-started">
-                  Get Started
-                  <ArrowRight className="ml-2 h-4 w-4" />
-                </a>
+              <Button size="lg" className="bg-white text-black hover:bg-white/90 font-medium">
+                Get Started
+                <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
               <Button
                 size="lg"
                 variant="outline"
-                asChild
-                className="border-border/50 bg-transparent backdrop-blur-sm hover:bg-card/50"
+                className="border-white/30 bg-white/10 text-white backdrop-blur-sm hover:bg-white/20"
               >
-                <a href="#learn-more">Learn More</a>
+                Learn More
               </Button>
             </div>
           </div>
 
           {/* Right Content - Feature Tags */}
-          <div className="space-y-4">
-            <FeatureTag title="Media and Entertainment" description="Studio-grade lip-sync for content creators" />
-            <FeatureTag
-              title="Newsrooms & Broadcasting"
-              description="Real-time translation with perfect lip synchronization"
-            />
-            <FeatureTag title="Multilingual Content" description="English, Urdu, and expanding language support" />
-            <FeatureTag title="API-First Architecture" description="Integrate into your production pipeline" />
+          <div className="space-y-3">
+            {slide.tags.map((tag, index) => (
+              <div
+                key={index}
+                className="text-sm font-medium text-white/80 tracking-wide uppercase transition-all hover:text-white"
+                style={{
+                  animation: `fadeInUp 0.6s ease-out ${index * 0.1}s both`,
+                }}
+              >
+                {tag}
+              </div>
+            ))}
           </div>
         </div>
       </div>
 
-      {/* Decorative gradient orbs */}
-      <div className="absolute -top-40 -right-40 h-96 w-96 rounded-full bg-accent/20 blur-3xl" />
-      <div className="absolute bottom-0 -left-40 h-96 w-96 rounded-full bg-accent/10 blur-3xl" />
-    </section>
-  )
-}
-
-function FeatureTag({ title, description }: { title: string; description: string }) {
-  return (
-    <div className="group relative rounded-xl border border-border/50 bg-card/30 p-6 backdrop-blur-sm transition-all hover:border-border hover:bg-card/50">
-      <div className="flex items-start justify-between">
-        <div className="space-y-1">
-          <h3 className="font-semibold text-foreground">{title}</h3>
-          <p className="text-sm text-muted-foreground">{description}</p>
-        </div>
-        <ArrowRight className="h-5 w-5 text-muted-foreground transition-transform group-hover:translate-x-1" />
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex gap-2">
+        {heroSlides.map((_, index) => (
+          <button
+            key={index}
+            onClick={() => setCurrentSlide(index)}
+            className={`h-1.5 rounded-full transition-all ${
+              index === currentSlide ? "w-8 bg-white" : "w-1.5 bg-white/50"
+            }`}
+            aria-label={`Go to slide ${index + 1}`}
+          />
+        ))}
       </div>
-    </div>
+
+      <style jsx>{`
+        @keyframes fadeInUp {
+          from {
+            opacity: 0;
+            transform: translateY(20px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+      `}</style>
+    </section>
   )
 }
