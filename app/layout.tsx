@@ -8,7 +8,7 @@ const _geist = Geist({ subsets: ["latin"] })
 const _geistMono = Geist_Mono({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "LipSync Maker AI - Building AI to Simulate Reality",
+  title: "First Pakistani Maverick Digital LipSync Maker AI - Building AI to Simulate Reality",
   description:
     "Transform any voice into studio-grade lip-sync video. AI-powered lip synchronization for content creators, newsrooms, and studios.",
   generator: "v0.app",
