@@ -12,29 +12,26 @@ export function Header() {
         </Link>
 
         <nav className="hidden items-center gap-8 md:flex">
-          <Link
-            href="#research"
-            className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
-          >
-            Research
+          <Link href="/" className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground">
+            Home
           </Link>
           <Link
-            href="#product"
+            href="/studio"
             className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
           >
-            Product
+            Studio
           </Link>
           <Link
-            href="#studios"
+            href="/pricing"
             className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
           >
-            Studios
+            Pricing
           </Link>
           <Link
-            href="#company"
+            href="#features"
             className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
           >
-            Company
+            Features
           </Link>
         </nav>
 
@@ -43,7 +40,7 @@ export function Header() {
             <Link href="/login">Log In</Link>
           </Button>
           <Button size="sm" asChild className="bg-primary text-primary-foreground hover:bg-primary/90">
-            <Link href="/signup">Launch Studio</Link>
+            <Link href="/studio">Launch Studio</Link>
           </Button>
         </div>
       </div>
