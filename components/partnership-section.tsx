@@ -7,7 +7,7 @@ export function PartnershipSection() {
         </p>
 
         <div className="flex flex-wrap items-center justify-center gap-12 opacity-60 grayscale">
-          {["BBC", "CNN", "Netflix", "Disney", "Amazon", "HBO"].map((brand) => (
+          {["Haris Basharat", "Hamza", "Syed Ahmer", "Babar", "Omair-Ul-Bari", "Shayan Butt"].map((brand) => (
             <div key={brand} className="text-2xl font-bold tracking-tight text-foreground/80">
               {brand}
             </div>

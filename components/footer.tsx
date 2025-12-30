@@ -10,7 +10,8 @@ export function Footer() {
               LipSync<span className="text-muted-foreground">AI</span>
             </div>
             <p className="text-sm text-muted-foreground leading-relaxed">
-              Building AI to simulate reality through advanced lip-sync technology.
+              Maverick Digital Building AI to simulate reality through advanced 
+			  lip-sync technology.
             </p>
           </div>
 
