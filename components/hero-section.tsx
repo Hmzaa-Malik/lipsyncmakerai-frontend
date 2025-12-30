@@ -7,7 +7,7 @@ import { useState, useEffect } from "react"
 const heroSlides = [
   {
     video: "/paper-boat-with-yellow-flower-floating-on-water-ci.jpg",
-    title: "Building AI to",
+    title: "Meverick Digital Provide Building AI to",
     subtitle: "Simulate the World",
     tags: [
       "MEDIA AND ENTERTAINMENT",
@@ -24,7 +24,7 @@ const heroSlides = [
   },
   {
     video: "/futuristic-ai-technology-neural-network-visualizat.jpg",
-    title: "Advanced AI Models",
+    title: "We Provide Advanced AI Models",
     subtitle: "That Understand Speech",
     tags: [
       "NATURAL LANGUAGE PROCESSING",
